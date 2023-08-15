@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, Param, ParseBoolPipe, ParseIntPipe, Post, Query, Res, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseBoolPipe, ParseIntPipe, Post, Query, Res, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Response } from 'express';
 import { Student } from './student.interface';
 import { StudentsService } from './students.service';
+import { StudentsGuard } from './students.guard';
 
 @Controller('students')
+@UseGuards(StudentsGuard)
 export class StudentsController {
 
     constructor(private studentService: StudentsService) { }
