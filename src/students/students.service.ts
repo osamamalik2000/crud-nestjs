@@ -7,8 +7,8 @@ export class StudentsService {
         { id: 1, firstName: 'Osama', lastName: 'Malik', contactNumber: '7088511786', contactEmail: 'itsosamamalik@gmail.com', isActive: true }
     ];
 
-    getStudents() {
-        return this.students;
+    getStudents(isActive) {
+        return this.students.filter(student => student.isActive == isActive);
     }
 
     getStudentById(id: number) {
@@ -36,5 +36,18 @@ export class StudentsService {
         student.id = this.students.length+1;
         this.students.push(student);
         return student;
+    }
+
+    deleteStudent(id) {
+        const student = this.students.find(item => {
+            return item.id == id;
+        });
+
+        if (student) {
+            student.isActive = false;
+            return student;
+        }
+
+        throw new HttpException('Student with id ' + id + ' not found', HttpStatus.NOT_FOUND)
     }
 }
