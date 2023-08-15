@@ -12,9 +12,13 @@ export class StudentsService {
     }
 
     getStudentById(id: number) {
-        return this.students.find(item => {
+        const student = this.students.find(item => {
             return item.id == id;
         });
+        if(student){
+            return student;
+        }
+        throw new HttpException(`Student with id ${id} not found`, HttpStatus.NOT_FOUND)
     }
 
     postStudent(student: Student) {

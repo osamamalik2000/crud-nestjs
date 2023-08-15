@@ -16,9 +16,7 @@ export class StudentsController {
     // ParseIntPipe: Example of query, parameters validation
     @Get(':id')
     getStudentById(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
-        const student = this.studentService.getStudentById(id);
-
-        student ? res.send(student) : res.send(`Student with id ${id} not found`);
+        res.send(this.studentService.getStudentById(id));
     }
 
     @Post('create')
