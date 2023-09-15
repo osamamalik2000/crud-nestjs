@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseBoolPipe, ParseIntPipe, Post, Query, Res, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseBoolPipe, ParseIntPipe, Post, Put, Query, Res, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Response } from 'express';
 import { Student } from './student.interface';
 import { StudentsService } from './students.service';
@@ -25,6 +25,12 @@ export class StudentsController {
     @UsePipes(new ValidationPipe())
     createStudent(@Body() student: Student, @Res() res: Response) {
         res.send(this.studentService.postStudent(student))
+    }
+
+    @Put('')
+    @UsePipes(new ValidationPipe())
+    updateStudent(@Body() student: Student, @Res() res: Response) {
+        res.send(this.studentService.updateStudent(student))
     }
 
     @Delete(':id')
